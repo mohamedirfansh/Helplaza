@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helplaza/constants.dart';
 import 'package:helplaza/models/task.dart';
+import 'package:helplaza/screens/home/settings_form.dart';
 import 'package:helplaza/services/auth.dart';
 import 'package:helplaza/services/database.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,17 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showSettingsPanel() {
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              child: SettingsForm(),
+            );
+          });
+    }
+
     return StreamProvider<List<Task>>.value(
       value: DatabaseService().tasks,
       child: Scaffold(
@@ -33,6 +45,14 @@ class Home extends StatelessWidget {
               onPressed: () async {
                 await _auth.signOut();
               },
+            ),
+            FlatButton.icon(
+              icon: Icon(Icons.help),
+              label: Text(
+                'HELP!',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => _showSettingsPanel(),
             )
           ],
         ),

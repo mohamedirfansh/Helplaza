@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helplaza/models/task.dart';
+import 'package:helplaza/models/user.dart';
 
 class DatabaseService {
   final String uid;
@@ -32,7 +33,24 @@ class DatabaseService {
     }).toList();
   }
 
+  // userData from snapshot
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid,
+      name: snapshot.data['name'],
+      task: snapshot.data['task'],
+      price: snapshot.data['price'],
+      urgency: snapshot.data['urgency'],
+    );
+  }
+
+  // Get task doc stream
   Stream<List<Task>> get tasks {
     return taskCollection.snapshots().map(_taskListFromSnapshot);
+  }
+
+  // Get user doc stream
+  Stream<UserData> get userData {
+    return taskCollection.document(uid).snapshots().map(_userDataFromSnapshot);
   }
 }
