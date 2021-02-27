@@ -82,6 +82,10 @@ class _BodyState extends State<Body> {
                         });
                         dynamic result = await _auth
                             .registerWithEmailAndPassword(email, password);
+                        setState(() {
+                          loading = false;
+                          invalid = 'Registered! Please login!';
+                        });
                         if (result == null) {
                           setState(() {
                             invalid =
