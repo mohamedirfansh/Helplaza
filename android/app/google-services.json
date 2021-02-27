@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "815044151395",
+    "project_id": "helplaza-app",
+    "storage_bucket": "helplaza-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815044151395:android:e03f6b5348ebdd65331056",
+        "android_client_info": {
+          "package_name": "com.mohamedirfan.helplaza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815044151395-7i373jjtv5dek974p0psdgg4bsa2i1k3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE7dX3y17HorYu9cHJwfYD4WitY0ZMqr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815044151395-7i373jjtv5dek974p0psdgg4bsa2i1k3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
