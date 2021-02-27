@@ -9,6 +9,7 @@ import 'package:helplaza/components/rounded_input_field.dart';
 import 'package:helplaza/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:helplaza/services/auth.dart';
+import 'package:helplaza/shared/loading.dart';
 
 class Body extends StatefulWidget {
   // final Function toggleView;
@@ -30,6 +31,8 @@ class _BodyState extends State<Body> {
     }
   }
 
+  bool loading = false;
+
   // Text field state
   String email = '';
   String password = '';
@@ -38,90 +41,98 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Background(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "SIGNUP",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: size.height * 0.03),
-            SvgPicture.asset(
-              "assets/icons/signup.svg",
-              height: size.height * 0.35,
-            ),
-            RoundedInputField(
-              hintText: "Your Email",
-              onChanged: (value) {
-                setState(() => email = value);
-              },
-            ),
-            RoundedPasswordField(
-              onChanged: (value) {
-                setState(() => password = value);
-              },
-            ),
-            RoundedButton(
-              text: "SIGNUP",
-              press: () async {
-                if (!_formKey()) {
-                  setState(() =>
-                      invalid = 'Please enter a valid email and password!');
-                  print('DEBUG!');
-                } else {
-                  setState(() => invalid = '');
-                  dynamic result =
-                      await _auth.registerWithEmailAndPassword(email, password);
-                  if (result == null) {
-                    setState(() =>
-                        invalid = 'Please enter a valid email and password!');
-                  }
-                }
-              },
-            ),
-            SizedBox(height: size.height * 0.03),
-            Text(
-              invalid,
-              style: TextStyle(color: Colors.red[400]),
-            ),
-            SizedBox(height: size.height * 0.03),
-            AlreadyHaveAnAccountCheck(
-              login: false,
-              press: () {
-                //widget.toggleView();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignIn();
+    return loading
+        ? Loading()
+        : Background(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "SIGNUP",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  SvgPicture.asset(
+                    "assets/icons/signup.svg",
+                    height: size.height * 0.35,
+                  ),
+                  RoundedInputField(
+                    hintText: "Your Email",
+                    onChanged: (value) {
+                      setState(() => email = value);
                     },
                   ),
-                );
-              },
+                  RoundedPasswordField(
+                    onChanged: (value) {
+                      setState(() => password = value);
+                    },
+                  ),
+                  RoundedButton(
+                    text: "SIGNUP",
+                    press: () async {
+                      if (!_formKey()) {
+                        setState(() => invalid =
+                            'Please enter a valid email and password!');
+                        print('DEBUG!');
+                      } else {
+                        setState(() {
+                          invalid = '';
+                          loading = true;
+                        });
+                        dynamic result = await _auth
+                            .registerWithEmailAndPassword(email, password);
+                        if (result == null) {
+                          setState(() {
+                            invalid =
+                                'Please enter a valid email and password!';
+                            loading = false;
+                          });
+                        }
+                      }
+                    },
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  Text(
+                    invalid,
+                    style: TextStyle(color: Colors.red[400]),
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  AlreadyHaveAnAccountCheck(
+                    login: false,
+                    press: () {
+                      //widget.toggleView();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignIn();
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  // OrDivider(),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: <Widget>[
+                  //     SocalIcon(
+                  //       iconSrc: "assets/icons/facebook.svg",
+                  //       press: () {},
+                  //     ),
+                  //     SocalIcon(
+                  //       iconSrc: "assets/icons/twitter.svg",
+                  //       press: () {},
+                  //     ),
+                  //     SocalIcon(
+                  //       iconSrc: "assets/icons/google-plus.svg",
+                  //       press: () {},
+                  //     ),
+                  //   ],
+                  // )
+                ],
+              ),
             ),
-            // OrDivider(),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: <Widget>[
-            //     SocalIcon(
-            //       iconSrc: "assets/icons/facebook.svg",
-            //       press: () {},
-            //     ),
-            //     SocalIcon(
-            //       iconSrc: "assets/icons/twitter.svg",
-            //       press: () {},
-            //     ),
-            //     SocalIcon(
-            //       iconSrc: "assets/icons/google-plus.svg",
-            //       press: () {},
-            //     ),
-            //   ],
-            // )
-          ],
-        ),
-      ),
-    );
+          );
   }
 }
