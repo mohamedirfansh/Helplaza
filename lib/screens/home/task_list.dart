@@ -11,7 +11,7 @@ class TaskList extends StatefulWidget {
 class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
-    final tasks = Provider.of<List<Task>>(context);
+    final tasks = Provider.of<List<Task>>(context) ?? [];
     tasks.forEach((task) {
       print(task.name);
       print(task.price);

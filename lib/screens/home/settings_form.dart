@@ -47,7 +47,7 @@ class _SettingsFormState extends State<SettingsForm> {
                 children: <Widget>[
                   Text(
                     'Need help with something?',
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 18.0, color: kPrimaryColor),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
@@ -102,10 +102,14 @@ class _SettingsFormState extends State<SettingsForm> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
-                        print(_currentName);
-                        print(_currentPrice);
-                        print(_currentTask);
-                        print(_currentUrgency);
+                        if (_formKey.currentState.validate()) {
+                          await DatabaseService(uid: user.uid).updateUserData(
+                              _currentPrice ?? userData.price,
+                              _currentName ?? userData.name,
+                              _currentUrgency ?? userData.urgency,
+                              _currentTask ?? userData.task);
+                          Navigator.pop(context);
+                        }
                       }),
                 ],
               ),
