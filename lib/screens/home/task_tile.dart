@@ -22,9 +22,12 @@ class TaskTile extends StatelessWidget {
             children: <Widget>[
               Text(
                 task.task,
-                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 15.0),
               ),
-              Text("I'll pay \$${task.price}!"),
+              Text(
+                "I'll pay \$${task.price}!",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
         ),
