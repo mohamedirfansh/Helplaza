@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helplaza/screens/authenticate/signin/sign_in.dart';
 import 'package:helplaza/screens/authenticate/signup/components/background.dart';
-import 'package:helplaza/screens/authenticate/signup/components/or_divider.dart';
-import 'package:helplaza/screens/authenticate/signup/components/social_icon.dart';
 import 'package:helplaza/components/already_have_an_account_acheck.dart';
 import 'package:helplaza/components/rounded_button.dart';
 import 'package:helplaza/components/rounded_input_field.dart';
@@ -12,9 +10,6 @@ import 'package:helplaza/services/auth.dart';
 import 'package:helplaza/shared/loading.dart';
 
 class Body extends StatefulWidget {
-  // final Function toggleView;
-  // Body({this.toggleView});
-
   @override
   _BodyState createState() => _BodyState();
 }
@@ -116,24 +111,6 @@ class _BodyState extends State<Body> {
                       );
                     },
                   ),
-                  // OrDivider(),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: <Widget>[
-                  //     SocalIcon(
-                  //       iconSrc: "assets/icons/facebook.svg",
-                  //       press: () {},
-                  //     ),
-                  //     SocalIcon(
-                  //       iconSrc: "assets/icons/twitter.svg",
-                  //       press: () {},
-                  //     ),
-                  //     SocalIcon(
-                  //       iconSrc: "assets/icons/google-plus.svg",
-                  //       press: () {},
-                  //     ),
-                  //   ],
-                  // )
                 ],
               ),
             ),

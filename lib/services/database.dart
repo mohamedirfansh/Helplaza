@@ -10,12 +10,6 @@ class DatabaseService {
   final CollectionReference taskCollection =
       Firestore.instance.collection('tasks');
 
-  /*
-  price -> sugars
-  name -> name
-  urgency -> strength
-  task -> NONE
-  */
   Future updateUserData(
       String price, String name, int urgency, String task) async {
     return await taskCollection.document(uid).setData(

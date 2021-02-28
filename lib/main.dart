@@ -3,7 +3,6 @@ import 'package:helplaza/models/user.dart';
 import 'package:helplaza/screens/wrapper.dart';
 import 'package:helplaza/services/auth.dart';
 import 'package:provider/provider.dart';
-//import 'package:helplaza/screens/welcome/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
