@@ -40,5 +40,7 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-#Demo Video
+# Hackathon submission related
 images/Helplaza_Demo.mp4
+images/Elevator_Pitch.txt
+images/Tracks_Declaration_Form.pdf
